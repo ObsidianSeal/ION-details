@@ -1,1 +1,1 @@
-yes
+disclaimer: the development of this app has relied HEAVILY on Gemini (i.e. there is AI generated code within)
