@@ -7,7 +7,7 @@ plugins {
 
 android {
     namespace = "page.pinniped.ION_details"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "page.pinniped.ION_details"
@@ -54,7 +54,6 @@ protobuf {
 }
 
 dependencies {
-
     implementation(libs.play.services.wearable)
     implementation(platform(libs.compose.bom))
     implementation(libs.ui)
@@ -72,8 +71,6 @@ dependencies {
     implementation(libs.horologist.tiles)
     implementation(libs.watchface.complications.data.source.ktx)
     implementation(libs.protobuf.javalite)
-//    implementation(libs.protobuf.javalite)
-//    implementation("com.google.protobuf:protobuf-javalite:3.25.3")
     androidTestImplementation(platform(libs.compose.bom))
     androidTestImplementation(libs.ui.test.junit4)
     debugImplementation(libs.ui.tooling)

@@ -26,7 +26,7 @@
                 android:value="SHORT_TEXT" />
             <meta-data
                 android:name="android.support.wearable.complications.UPDATE_PERIOD_SECONDS"
-                android:value="20" />
+                android:value="200" />
         </service>
         <service
             android:name=".tile.MainTileService"
@@ -48,10 +48,6 @@
         <uses-library
             android:name="wear-sdk"
             android:required="false" />
-        <!--
-               Set to true if your app is Standalone, that is, it does not require the handheld
-               app to run.
-        -->
         <meta-data
             android:name="com.google.android.wearable.standalone"
             android:value="true" />
