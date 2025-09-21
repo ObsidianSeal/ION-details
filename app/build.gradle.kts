@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.protobuf)
 }
 
 android {
@@ -39,6 +40,19 @@ android {
     }
 }
 
+protobuf {
+    protoc {
+        artifact = "com.google.protobuf:protoc:4.32.1"
+    }
+    generateProtoTasks {
+        all().forEach { task ->
+           task.builtins.create("java") {
+               option("lite")
+           }
+        }
+    }
+}
+
 dependencies {
 
     implementation(libs.play.services.wearable)
@@ -57,6 +71,9 @@ dependencies {
     implementation(libs.horologist.compose.tools)
     implementation(libs.horologist.tiles)
     implementation(libs.watchface.complications.data.source.ktx)
+    implementation(libs.protobuf.javalite)
+//    implementation(libs.protobuf.javalite)
+//    implementation("com.google.protobuf:protobuf-javalite:3.25.3")
     androidTestImplementation(platform(libs.compose.bom))
     androidTestImplementation(libs.ui.test.junit4)
     debugImplementation(libs.ui.tooling)
