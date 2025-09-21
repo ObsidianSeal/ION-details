@@ -1,15 +1,15 @@
 package page.pinniped.ION_details.complication
 
 import android.util.Log
-import androidx.compose.ui.text.intl.Locale
 import androidx.wear.watchface.complications.data.ComplicationData
 import androidx.wear.watchface.complications.data.ComplicationType
 import androidx.wear.watchface.complications.data.PlainComplicationText
 import androidx.wear.watchface.complications.data.ShortTextComplicationData
 import androidx.wear.watchface.complications.datasource.ComplicationRequest
 import androidx.wear.watchface.complications.datasource.SuspendingComplicationDataSourceService
-import java.util.Calendar
-import kotlin.math.roundToInt
+import java.time.LocalTime
+import java.time.format.DateTimeFormatter
+import java.util.Locale
 
 /**
  * Skeleton for complication data source that returns short text.
@@ -23,7 +23,7 @@ class MainComplicationService : SuspendingComplicationDataSourceService() {
         if (type != ComplicationType.SHORT_TEXT) {
             return null
         }
-        return createComplicationData("0:00", "ION data test")
+        return createComplicationData("00:00›00:00", "ION data test")
     }
 
     override suspend fun onComplicationRequest(request: ComplicationRequest): ComplicationData {
@@ -40,7 +40,12 @@ class MainComplicationService : SuspendingComplicationDataSourceService() {
     }
 
     private fun getComplicationText(): String {
-        return "›› …${(Math.random() * 59).roundToInt().toString().padStart(2, '0')}:${(Math.random() * 59).roundToInt().toString().padStart(2, '0')}"
+        val currentTime = LocalTime.now()
+
+        val formatter = DateTimeFormatter.ofPattern("mm:ss", Locale.getDefault())
+        val formattedTime = currentTime.format(formatter)
+
+        return "${formattedTime}›00:00"
     }
 
     private fun createComplicationData(text: String, contentDescription: String) =
