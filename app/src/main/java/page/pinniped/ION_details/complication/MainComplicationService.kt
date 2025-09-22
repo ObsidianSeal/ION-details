@@ -1,6 +1,5 @@
 package page.pinniped.ION_details.complication
 
-import android.util.Log
 import androidx.wear.watchface.complications.data.ComplicationData
 import androidx.wear.watchface.complications.data.ComplicationType
 import androidx.wear.watchface.complications.data.PlainComplicationText
@@ -36,8 +35,6 @@ class MainComplicationService : SuspendingComplicationDataSourceService() {
     }
 
     override suspend fun onComplicationRequest(request: ComplicationRequest): ComplicationData {
-        Log.d(TAG, "onComplicationRequest called at: ${System.currentTimeMillis()}")
-
         val feedMessage = fetchAndParseTripUpdates()
 
         val currentTime = LocalTime.now()
@@ -79,7 +76,7 @@ class MainComplicationService : SuspendingComplicationDataSourceService() {
                 }
             }
         } else {
-            return createComplicationData("ERROR", "ION details")
+            return createComplicationData("${currentTime.format(timeFormatter)}›ERROR", "ION details")
         }
 
         val gateTime = LocalTime.ofSecondOfDay(Math.min(southboundGradeCrossingTime, northboundGradeCrossingTime) % 86400)
