@@ -85,7 +85,7 @@ class MainComplicationService : SuspendingComplicationDataSourceService() {
 
     private suspend fun fetchAndParseTripUpdates(): GtfsRealtime.FeedMessage? {
         return withContext(Dispatchers.IO) {
-            val url = URL("https://webapps.regionofwaterloo.ca/api/grt-routes/api/tripupdates")
+            val url = URL("https://webapps.regionofwaterloo.ca/api/grt-routes/api/tripupdates/2")
             var connection: HttpURLConnection? = null
             var inputStream: InputStream? = null
             try {
