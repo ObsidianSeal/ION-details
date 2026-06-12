@@ -17,7 +17,7 @@ horologistComposeTools = "0.6.17"
 horologistTiles = "0.6.17"
 watchfaceComplicationsDataSourceKtx = "1.2.1"
 protobufJavalite = "4.32.1"
-protobufPlugin = "0.9.5"
+protobufPlugin = "0.10.0"
 
 [libraries]
 play-services-wearable = { group = "com.google.android.gms", name = "play-services-wearable", version.ref = "playServicesWearable" }
