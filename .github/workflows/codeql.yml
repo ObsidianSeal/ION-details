@@ -47,9 +47,11 @@ jobs:
     - name: Run manual build steps
       if: matrix.build-mode == 'manual'
       shell: bash
+      env:
+        # This tells the CodeQL interceptor to leave Kotlin alone so it won't crash
+        CODEQL_EXTRACTOR_KOTLIN_OPTION_DISABLE: "true"
       run: |
         chmod +x ./gradlew
-        # Target the specific Android compilation tasks instead of the generic Java one
         ./gradlew clean compileDebugJavaWithJavac compileDebugKotlin --no-daemon
 
     - name: Perform CodeQL Analysis
