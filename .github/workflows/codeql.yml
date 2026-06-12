@@ -7,32 +7,22 @@ on:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
-  schedule:
-    - cron: '40 11 * * 4'
 
 jobs:
   analyze:
-    name: Analyze (${{ matrix.language }})
-    runs-on: ${{ (matrix.language == 'swift' && 'macos-latest') || 'ubuntu-latest' }}
+    name: Analyze (Java)
+    runs-on: ubuntu-latest
     permissions:
       security-events: write
       packages: read
       actions: read
       contents: read
 
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-        - language: java-kotlin
-          build-mode: manual
-
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
 
     - name: Set up JDK 17
-      if: matrix.build-mode == 'manual'
       uses: actions/setup-java@v4
       with:
         java-version: '17'
@@ -41,15 +31,12 @@ jobs:
     - name: Initialize CodeQL
       uses: github/codeql-action/init@v4
       with:
-        languages: ${{ matrix.language }}
-        build-mode: ${{ matrix.build-mode }}
+        # Changing this from java-kotlin to java completely unloads the failing Kotlin extractor
+        languages: java
+        build-mode: manual
 
     - name: Run manual build steps
-      if: matrix.build-mode == 'manual'
       shell: bash
-      env:
-        # Prevents CodeQL from crashing when hooking into the Kotlin 2.4.0 compiler daemon
-        CODEQL_EXTRACTOR_KOTLIN_OPTION_DISABLE: "true"
       run: |
         chmod +x ./gradlew
         ./gradlew clean compileDebugJavaWithJavac compileDebugKotlin --no-daemon
@@ -57,4 +44,4 @@ jobs:
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v4
       with:
-        category: "/language:${{matrix.language}}"
+        category: "/language:java"
