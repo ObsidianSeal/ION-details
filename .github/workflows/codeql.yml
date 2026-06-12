@@ -48,7 +48,7 @@ jobs:
       if: matrix.build-mode == 'manual'
       shell: bash
       env:
-        # This tells the CodeQL interceptor to leave Kotlin alone so it won't crash
+        # Prevents CodeQL from crashing when hooking into the Kotlin 2.4.0 compiler daemon
         CODEQL_EXTRACTOR_KOTLIN_OPTION_DISABLE: "true"
       run: |
         chmod +x ./gradlew
