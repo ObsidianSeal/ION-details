@@ -2,7 +2,7 @@
 agp = "8.13.2"
 kotlin = "2.4.0"
 playServicesWearable = "20.0.1"
-composeBom = "2024.09.00"
+composeBom = "2026.05.01"
 composeMaterial = "1.2.1"
 composeFoundation = "1.6.2"
 protobufJavaliteVersion = "4.32.1"
